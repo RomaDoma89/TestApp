@@ -7,6 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,6 @@ public class BlockFragment extends Fragment {
     private Toolbar toolbar;
     private ListView list;
     private boolean isActionShown;
-    private int checkedPos = -1;
 
     public static BlockFragment newInstance(String title, List<Line> lines) {
 
@@ -74,7 +75,7 @@ public class BlockFragment extends Fragment {
                 return true;
             }
         });
-        hideToolbarActions();
+        showOverflowMenu(false);
 
         list = (ListView) rootView.findViewById(R.id.list_view);
         BlockLinesAdapter adapter = new BlockLinesAdapter(this.getContext(), R.layout.line_item, new ArrayList<Line>());
@@ -96,10 +97,10 @@ public class BlockFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (list.getCheckedItemPosition() == position && isActionShown) {
-                    hideToolbarActions();
+                    showOverflowMenu(false);
                     list.setItemChecked(position, false);
                 } else {
-                    showToolbarActions();
+                    showOverflowMenu(true);
                     list.setItemChecked(position, true);
                 }
                 return true;
@@ -114,22 +115,14 @@ public class BlockFragment extends Fragment {
                 } else {
                     list.setItemChecked(position, true);
                 }
-                hideToolbarActions();
+                showOverflowMenu(false);
             }
         });
     }
 
-    private void showToolbarActions() {
-        isActionShown = true;
-        toolbar.getMenu().findItem(R.id.action_add).setVisible(true);
-        toolbar.getMenu().findItem(R.id.action_edit).setVisible(true);
-        toolbar.getMenu().findItem(R.id.action_lock).setVisible(true);
-    }
-
-    private void hideToolbarActions() {
-        isActionShown = false;
-        toolbar.getMenu().findItem(R.id.action_add).setVisible(false);
-        toolbar.getMenu().findItem(R.id.action_edit).setVisible(false);
-        toolbar.getMenu().findItem(R.id.action_lock).setVisible(false);
+    public void showOverflowMenu(boolean showMenu){
+        toolbar.getMenu().setGroupVisible(R.id.context_group, showMenu);
+        if (showMenu) isActionShown = true;
+        else isActionShown = false;
     }
 }

@@ -2,23 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:testApp="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_add"
-        android:icon="@drawable/ic_add"
-        testApp:showAsAction="always"
-        android:title="Adding"/>
+    <group android:id="@+id/context_group">
+        <item
+            android:id="@+id/action_add"
+            android:icon="@drawable/ic_add"
+            testApp:showAsAction="always"
+            android:title="Adding"/>
 
-    <item
-        android:id="@+id/action_edit"
-        android:icon="@drawable/ic_edit"
-        testApp:showAsAction="always"
-        android:title="Editing"/>
+        <item
+            android:id="@+id/action_edit"
+            android:icon="@drawable/ic_edit"
+            testApp:showAsAction="always"
+            android:title="Editing"/>
 
-    <item
-        android:id="@+id/action_lock"
-        android:icon="@drawable/ic_locked"
-        testApp:showAsAction="always"
-        android:title="Locking"/>
+        <item
+            android:id="@+id/action_lock"
+            android:icon="@drawable/ic_locked"
+            testApp:showAsAction="always"
+            android:title="Locking"/>
+    </group>
 
     <group >
         <item

@@ -32,7 +32,7 @@ public class BlocksPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return blocks.get(position).getArguments().getString("TITLE");
+        return blocks.get(position).getArguments().getString("TITLE_TAG");
     }
 
     public void addBlock(Fragment fragment) {
